@@ -42,26 +42,14 @@ const Dashboard: React.FC = () => {
         (t: Transaction) => ({
           ...t,
           formattedDate: format(parseISO(t.created_at), 'dd/mm/yyyy'),
-          formattedValue: new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-          }).format(t.value),
+          formattedValue: formatValue(t.value),
         }),
       );
 
       const formattedBalance = {
-        income: new Intl.NumberFormat('pt-BR', {
-          style: 'currency',
-          currency: 'BRL',
-        }).format(response.data.balance.income),
-        outcome: new Intl.NumberFormat('pt-BR', {
-          style: 'currency',
-          currency: 'BRL',
-        }).format(response.data.balance.outcome),
-        total: new Intl.NumberFormat('pt-BR', {
-          style: 'currency',
-          currency: 'BRL',
-        }).format(response.data.balance.total),
+        income: formatValue(response.data.balance.income),
+        outcome: formatValue(response.data.balance.outcome),
+        total: formatValue(response.data.balance.total),
       };
 
       setTransactions(formattedTransactions);
